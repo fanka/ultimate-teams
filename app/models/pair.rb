@@ -33,7 +33,7 @@ def generate_pairs(total_of_pairs)
   @new_pairs << make_pair(index_of_pair)
 end
 
-end
+end 
 
 
 
