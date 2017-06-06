@@ -1,0 +1,5 @@
+<h1>Todays pairs:</h1>
+<% generate_pairs %>
+<p><%= @new_pairs.each do |pair| %>
+<%= "Student 1: #{pair|0|}\lStudent 2: #{pair|1|}" %></p>
+<% end %> 
