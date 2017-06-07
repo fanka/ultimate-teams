@@ -15,17 +15,7 @@
 
   <div class="form-group">
     <label>Profile Picture</label>
-    <% if @profile.profile_picture.present? %>
-      <div>Current profile picture</div>
-      <%= image_tag @profile.profile_picture %>
-    <% end %>
-    <div>
-      <span class="btn btn-default">
-        Upload Profile Picture
-        <br>
-        <%= f.file_field :profile_picture, type: :file %>
-      </span>
-    </div>
+    <%= f.text_field :profile_picture, placeholder: "Image URL", class: "form-control" %>
   </div>
 
   <div class="actions">

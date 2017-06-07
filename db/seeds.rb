@@ -1,6 +1,6 @@
 User.delete_all
 
-arno      = User.create(email: "a@team.com", password: "111111")
+arno      = User.create(email: "a@team.com", password: "111111", admin: true)
 bert      = User.create(email: "b@team.com", password: "111111")
 chris     = User.create(email: "c@team.com", password: "111111")
 debbie    = User.create(email: "d@team.com", password: "111111")
