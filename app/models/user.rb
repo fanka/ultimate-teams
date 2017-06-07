@@ -11,6 +11,10 @@ class User < ApplicationRecord
     profile.present?
   end
 
+  def is_admin?
+    admin == true
+  end
+
   def full_name
     profile.full_name
   end

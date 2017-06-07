@@ -1,4 +1,3 @@
-<!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
@@ -8,31 +7,61 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Project name</a>
+      <a class="navbar-brand" href="#">Ultimate Teams</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <ul class="nav navbar-nav navbar-right">
+
+        <% if !user_signed_in? %>
+
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Log In</a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#"><%= link_to "Log In", new_user_session_path %></a></li>
             <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="#"><li><%= link_to "Sign Up", new_user_registration_path %></a></li>
           </ul>
         </li>
+
+        <% elsif current_user.is_admin? %>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><%= link_to "Teams", pairs_path %></li>
+            <% if current_user.has_profile? %>
+              <li><a href="#"><%= link_to "Edit Profile", edit_profile_path(current_user.profile) %></a></li>
+              <% else %>
+              <li><a href="#"><%= link_to "Create Profile", new_profile_path %></a></li>
+              <% end %>
+              <li><%= link_to "Change Password", edit_user_registration_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+
+        <% else %>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <% if current_user.has_profile? %>
+              <li><a href="#"><%= link_to "Edit Profile", edit_profile_path(current_user.profile) %></a></li>
+              <% else %>
+              <li><a href="#"><%= link_to "Create Profile", new_profile_path %></a></li>
+              <% end %>
+              <li><%= link_to "Change Password", edit_user_registration_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+
+        <% end %>
+
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="../navbar/">Default</a></li>
-        <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-        <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
+    </div>
   </div>
 </nav>
