@@ -1,5 +1,20 @@
 <h1>Todays pairs:</h1>
+
 <div><%= button_to 'Generate new pairs' , rotate_and_generate_new_path, class: 'rotate-and-generate-new-button' %></div>
-<div class="pair-list"><p><% Pair.all.each do |pair| %>
-<%= "Student 1: #{pair.student_one.email} -- Student 2: #{pair.student_two.email}" %></p><div>
+
+<div class="pair-list">
+  <p><% Pair.all.each do |pair| %>
+<%= "Student 1: #{pair.student_one.email} -- Student 2: #{pair.student_two.email}" %></p>
+<p><%= form_for pair do |f| %>
+<div class="form-group">
+    <label>Select date:</label>
+  <%= f.date_select :pair_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  </div>
+</p><% end %>
+
+
+</div>
 <% end %>
