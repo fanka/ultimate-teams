@@ -1,1 +1,25 @@
-<p/>Hi Admin</p>
+<div class="container">
+
+  <h1>Hi Admin</h1>
+
+  <hr>
+
+  <ul>
+    <p>Admins</p>
+    <% @users.each do |user| %>
+      <% unless !user.is_admin? %>
+        <li><%= user.email %>
+        <%= link_to "[demote]", admins_path(user.id), method: :post %></li>
+      <% end %>
+    <% end %>
+    <hr>
+    <p>Users</p>
+    <% @users.each do |user| %>
+      <% unless user.is_admin? %>
+        <li><%= user.email %>
+        <%= link_to "[make admin]", admins_path(user.id), method: :post %></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+</div>

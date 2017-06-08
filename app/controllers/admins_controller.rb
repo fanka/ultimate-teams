@@ -1,12 +1,11 @@
 class AdminsController < ApplicationController
-  if current_user.admin?
-    # do something
+
+  def index
+    @users = User.all
   end
 
-  if current_user.try(:admin?)
-    # do something
+  def show
+    @user = User.find(params[:id])
   end
+
 end
-
-
-# current_user.update_attribute :admin, true
