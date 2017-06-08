@@ -1,17 +1,17 @@
 <h1>Todays pairs:</h1>
 <% Pair.generate_pairs(User.all.count / 2 ) %>
 <p><% Pair.all.each do |pair| %>
-<%= "Student 1: #{pair.student_1} -- Student 2: #{pair.student_2}" %></p>
+<%= "Student 1: #{pair.student_one.email} -- Student 2: #{pair.student_two}" %></p>
 <% end %>
 <h1>Tomorrow pairs:</h1>
 <% Pair.daily_rotation %>
 <% Pair.generate_pairs(User.all.count / 2 ) %>
 <p><% Pair.all.each do |pair| %>
-<%= "Student 1: #{pair.student_1} -- Student 2: #{pair.student_2}" %></p>
+<%= "Student 1: #{pair.student_one} -- Student 2: #{pair.student_two}" %></p>
 <% end %>
 <h1>The day after tomorrow pairs:</h1>
 <% Pair.daily_rotation %>
 <% Pair.generate_pairs(User.all.count / 2 ) %>
 <p><% Pair.all.each do |pair| %>
-<%= "Student 1: #{pair.student_1} -- Student 2: #{pair.student_2}" %></p>
+<%= "Student 1: #{pair.student_one} -- Student 2: #{pair.student_two}" %></p>
 <% end %>
