@@ -2,3 +2,16 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+.profile_picture img {
+  max-width: 200px;
+}
+
+.show_team_mate {
+  text-align: center;
+}
+
+.container {
+  padding: 20px;
+}

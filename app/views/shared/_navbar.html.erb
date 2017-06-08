@@ -27,10 +27,12 @@
         <% elsif current_user.is_admin? %>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.has_profile? ? current_user.full_name : current_user.email %></a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><%= link_to "Teams", pairs_path %></li>
+            <li><%= link_to "View Users", admins_path %></li>
+            <li><%= link_to "View Teams", pairs_path %></li>
+            <li role="separator" class="divider"></li>
             <% if current_user.has_profile? %>
               <li><a href="#"><%= link_to "Edit Profile", edit_profile_path(current_user.profile) %></a></li>
               <% else %>
@@ -45,9 +47,11 @@
         <% else %>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.has_profile? ? current_user.full_name : current_user.email %></a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><%= link_to "Today's Teammate", pair_path(current_user) %></li>
+            <li role="separator" class="divider"></li>
             <% if current_user.has_profile? %>
               <li><a href="#"><%= link_to "Edit Profile", edit_profile_path(current_user.profile) %></a></li>
               <% else %>

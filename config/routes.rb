@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post '/admins.:id' => 'users#change_admin_status'
   post 'rotate_and_generate_new' => 'pairs#rotate_and_generate_new', as: :rotate_and_generate_new
   
+
   devise_for :admins
   devise_for :users
 
