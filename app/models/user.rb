@@ -10,11 +10,17 @@ class User < ApplicationRecord
     profile.present?
   end
 
+  def full_name
+    profile.full_name
+  end
+
   def is_admin?
     admin == true
   end
 
-  def full_name
-    profile.full_name
+  def change_admin_status
+    self.admin = !self.admin
+    self.save
   end
+
 end
