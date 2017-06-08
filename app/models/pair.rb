@@ -1,6 +1,7 @@
 class Pair < ApplicationRecord
-  has_many :users
-  validates :users, length: {maximum: 2}
+  belongs_to :student_one, class_name: User
+  belongs_to :student_two, class_name: User
+  validates_presence_of :student_one, :student_two
 
 @students_half_1, @students_half_2 = User.all.each_slice( (User.all.count/2.0).round ).to_a
 
@@ -24,9 +25,9 @@ end
 def self.generate_pairs(total_of_pairs)
   Pair.destroy_all
   (0...total_of_pairs).each do |index_of_pair|
-  @pair = Pair.create(student_1: @students_half_1[index_of_pair].email, student_2: @students_half_2[index_of_pair].email )
-  #@pair.student_1 = @students_half_1[index_of_pair].email
-  #@pair.student_2 = @students_half_2[index_of_pair].email
+  @pair = Pair.create(student_one: @students_half_1[index_of_pair], student_two: @students_half_2[index_of_pair] )
+  #@pair.student_one = @students_half_1[index_of_pair].email
+  #@pair.student_two = @students_half_2[index_of_pair].email
 
   #@new_pairs << @pair
 end
