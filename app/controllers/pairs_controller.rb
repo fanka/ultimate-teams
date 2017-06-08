@@ -3,6 +3,8 @@ class PairsController < ApplicationController
   before_action :must_be_admin, only: :index
   helper_method :rotate_and_generate_new
 
+
+
   def index
     @pairs = Pair.all
     @users = User.all
@@ -32,7 +34,14 @@ class PairsController < ApplicationController
   def rotate_and_generate_new
     Pair.daily_rotation
     Pair.generate_pairs
+
+    respond_to do |format|
+        format.html
+        format.js { render :file => "/app/assets/javascripts/pairs.js" }
+    end
   end
+
+
 
   private
 
