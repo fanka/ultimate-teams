@@ -26,11 +26,8 @@ def self.generate_pairs
   total_of_pairs = (User.count % 2 == 0) ? (User.count / 2) : (User.count / 2 + 1)
   Pair.destroy_all
   (0...total_of_pairs).each do |index_of_pair|
-  @pair = Pair.create(student_one: @students_half_1[index_of_pair], student_two: @students_half_2[index_of_pair] )
-  #@pair.student_one = @students_half_1[index_of_pair].email
-  #@pair.student_two = @students_half_2[index_of_pair].email
+  @pair = Pair.create(student_one: @students_half_1[index_of_pair], student_two: @students_half_2[index_of_pair], pair_date: @pair_date )
 
-  #@new_pairs << @pair
 end
 end
 

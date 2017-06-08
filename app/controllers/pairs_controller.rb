@@ -9,6 +9,7 @@ class PairsController < ApplicationController
     @pairs = Pair.all
     @users = User.all
     @students_half_1, @students_half_2 = @users.each_slice( (@users.count/2.0).round ).to_a
+
   end
 
   def new
@@ -17,7 +18,7 @@ class PairsController < ApplicationController
 
   def create
     @pair = Pair.new
-    #@pair = [@students_half_1[index_of_pair], @students_half_2[index_of_pair]]
+
     @pair.save
   end
 
@@ -27,6 +28,13 @@ class PairsController < ApplicationController
 
   def show
     @pair = Pair.find_by(student_one_id: current_user.id) || @pair = Pair.find_by(student_two_id: current_user.id)
+
+  end
+
+  def update
+    @pair = Pair.find(params[:id])
+    @pair.update(pair_params)
+    @pair.save
 
 
   end
@@ -49,6 +57,10 @@ class PairsController < ApplicationController
     unless current_user && current_user.admin?
       redirect_to root_path, notice: "Only admin can view all pairs"
     end
+  end
+
+  def pair_params
+        params.require(:pair).permit(:student_one, :student_two, :pair_date)
   end
 
 end
