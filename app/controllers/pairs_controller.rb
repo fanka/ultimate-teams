@@ -1,6 +1,7 @@
 class PairsController < ApplicationController
   before_action :authenticate_user!
   before_action :must_be_admin, only: :index
+  helper_method :rotate_and_generate_new
 
   def index
     @pairs = Pair.all
@@ -28,11 +29,9 @@ class PairsController < ApplicationController
 
   end
 
-  def rotate
-  x=@students_half_1.pop
-  @students_half_2.push(x)
-  y=@students_half_2.shift
-  @students_half_1.insert(1,y)
+  def rotate_and_generate_new
+    Pair.daily_rotation
+    Pair.generate_pairs
   end
 
   private
