@@ -1,5 +1,9 @@
 class PairsController < ApplicationController
-  helper_method :rotate
+  before_action :authenticate_user!
+  before_action :must_be_admin, only: :index
+  helper_method :rotate_and_generate_new
+
+
 
   def index
     @pairs = Pair.all
@@ -21,11 +25,30 @@ class PairsController < ApplicationController
     @pair.destroy
   end
 
-  def rotate
-  x=@students_half_1.pop
-  @students_half_2.push(x)
-  y=@students_half_2.shift
-  @students_half_1.insert(1,y)
+  def show
+    @pair = Pair.find_by(student_one_id: current_user.id) || @pair = Pair.find_by(student_two_id: current_user.id)
+
+
+  end
+
+  def rotate_and_generate_new
+    Pair.daily_rotation
+    Pair.generate_pairs
+
+    respond_to do |format|
+        format.html
+        format.js { render :file => "/app/assets/javascripts/pairs.js" }
+    end
+  end
+
+
+
+  private
+
+  def must_be_admin
+    unless current_user && current_user.admin?
+      redirect_to root_path, notice: "Only admin can view all pairs"
+    end
   end
 
 end
