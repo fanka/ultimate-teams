@@ -12,6 +12,19 @@ class PairsController < ApplicationController
 
   end
 
+  def choose_date
+
+    @users = User.all
+    @students_half_1, @students_half_2 = @users.each_slice( (@users.count/2.0).round ).to_a
+    Pair.daily_rotation
+    total_of_pairs = (User.count % 2 == 0) ? (User.count / 2) : (User.count / 2 + 1)
+    (0...total_of_pairs).each do |index_of_pair|
+    @pair = Pair.create(student_one: @students_half_1[index_of_pair], student_two: @students_half_2[index_of_pair], pair_date: params[:chosen_date] )
+
+  end
+  end
+
+
   def new
     @pair = Pair.new
   end
@@ -35,19 +48,9 @@ class PairsController < ApplicationController
     @pair = Pair.find(params[:id])
     @pair.update(pair_params)
     @pair.save
-
-
   end
 
-  def rotate_and_generate_new
-    Pair.daily_rotation
-    Pair.generate_pairs
 
-    respond_to do |format|
-        format.html
-        format.js { render :file => "/app/assets/javascripts/pairs.js" }
-    end
-  end
 
 
 
