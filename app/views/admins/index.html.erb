@@ -9,7 +9,7 @@
     <% @users.each do |user| %>
       <% unless !user.is_admin? || user == current_user %>
         <li><%= user.email %>
-        <%= link_to "[demote]", admins_path(user.id), method: :post %></li>
+        <%= link_to "[demote]", admins_path(user.id), remote: true, method: :post %></li>
       <% end %>
     <% end %>
     <hr>
@@ -17,7 +17,7 @@
     <% @users.each do |user| %>
       <% unless user.is_admin? || user == current_user %>
         <li><%= user.email %>
-        <%= link_to "[make admin]", admins_path(user.id), method: :post %></li>
+        <%= link_to "[make admin]", admins_path(user.id), remote: true, method: :post %></li>
       <% end %>
     <% end %>
   </ul>

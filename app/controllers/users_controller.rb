@@ -11,7 +11,11 @@ class UsersController < ApplicationController
   def change_admin_status
     @user = User.find(params[:id])
     @user.change_admin_status
-    redirect_to admins_path, notice: "Yay"
+
+    respond_to do |format|
+      format.html { redirect_to admins_path }
+      format.json { render json: @user }
+    end
   end
 
 end
