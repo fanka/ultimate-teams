@@ -22,3 +22,9 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <% @pairs.each do |pair| %>
+    <%= "#{pair.student_one.email} -- #{pair.student_two.email}" %>
+  <% end %>
+</div>
