@@ -11,5 +11,6 @@ han       = User.create!({ email: "h@team.com", password: "111111" })
 iris      = User.create!({ email: "i@team.com", password: "111111" })
 job       = User.create!({ email: "j@team.com", password: "111111" })
 kate      = User.create!({ email: "k@team.com", password: "111111" })
+lila      = User.create!({ email: "l@team.com", password: "111111" })
 
 #Pair.create!(student_one: arno, student_two: bert)

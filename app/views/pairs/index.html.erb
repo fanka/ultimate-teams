@@ -1,18 +1,30 @@
-<h1>Todays pairs:</h1>
+
+<div class="container">
+  <h1>Today's Teams:</h1>
+
+  <div>
+    <%= form_tag(choose_date_path, :method=>'post') do %>
+      <p><%= date_field_tag :chosen_date %></p>
+      <p><%= submit_tag 'Generate new pairs' %></p>
+    <% end %>
+
+  </div>
 
 
+    <p><% @pairs.each do |pair| %>
 
-
-<%= form_tag(choose_date_path, :method=>'post') do %>
-<p><%= date_field_tag :chosen_date %></p>
-<p>
-   <%= submit_tag 'Generate new pairs' %>
- </p>
-<% end %>
-
-
-<div class="pair-list">
-  <p><% Pair.all.each do |pair| %>
-<%= "Student 1: #{pair.student_one.email} -- Student 2: #{pair.student_two.email} --- #{pair.pair_date}" %></p>
+      <%= "Student 1: #{pair.student_one.email} -- Student 2: #{pair.student_two.email} --- #{pair.pair_date}" %></p>
+  <% end %>
 </div>
-<% end %>
+
+
+
+<div class="container">
+  <% @my_pairs1.each do |pair| %>
+    <%= "#{pair.student_one.email} -- #{pair.student_two.email}" %>
+  <% end %>
+  <% @my_pairs2.each do |pair| %>
+    <%= "#{pair.student_one.email} -- #{pair.student_two.email}" %>
+  <% end %>
+
+</div>
